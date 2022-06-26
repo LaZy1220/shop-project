@@ -1,0 +1,26 @@
+.footer{
+    background-color: brown;
+    height: 50px;
+    text-align: center;
+  }
+  .footer__text{
+    position: relative;
+    top:10px;
+    color: white;
+    padding-right: 10%;
+  }
+  .footer__link{
+    position: relative;
+    top:10px;
+    text-decoration: none;
+    color: white;
+    margin-left: 10%;
+    display: inline-block;
+  }
+  .footer__link:hover{
+    color:gold;
+  }
+  .footer__line{
+    height: 10px;
+    background-color: #c12131;  
+  }

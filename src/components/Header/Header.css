@@ -1,0 +1,21 @@
+.header{
+    display: grid;
+    background-color: #04c9a8;
+    grid-template-columns: 1fr 100px;
+  }
+  .header__logo{
+    font-size: 55px;
+    font-family: 'Permanent Marker', cursive;
+    color:#030354;
+    padding:10px 30px
+  }
+  @media(max-width:490px){
+    .header__logo{
+      font-size:38px
+    }
+  }
+  @media(max-width:392px){
+    .header__logo{
+      font-size:31px
+    }
+  }

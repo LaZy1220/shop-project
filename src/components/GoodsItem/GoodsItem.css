@@ -1,0 +1,5 @@
+.card-content{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-gap: 50px;
+}
