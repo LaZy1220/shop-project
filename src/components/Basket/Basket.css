@@ -1,0 +1,15 @@
+.basket{
+    padding:1rem;
+    background-color:#04c9a8;
+    position: fixed;
+    right: 1rem;
+    top:1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 30%;
+}
+@media(max-width:400px){
+    .basket{
+        padding: 0.5rem;
+    }
+  }
