@@ -4,16 +4,40 @@ import { Basket } from '../Basket/Basket';
 import { GoodsList } from '../GoodsList/GoodsList'
 import { Preloader } from '../Preloader/Preloader'
 import './Content.css'
+import { Pagination } from '../Pagination/Pagination';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const API_URL = 'https://fortniteapi.io/v2/shop?lang=en'
+const API_URL = 'https://fortniteapi.io/v2/shop?_limit=10?lang=en?'
 
 export function Content(){
     const [goods,setGoods] = useState([])
     const [isLoading,setIsLoading]=useState('true')
     const [order,setOrder] = useState([])
     const [isHide,setIsHide] =useState(false)
+    const [currentPage,setCurrentPage] = useState(1)
+    
+    const goodsPerPage = 9
+    const lastGoodsIndex = currentPage * goodsPerPage
+    const firstGoodsIndex = lastGoodsIndex - goodsPerPage
+    const currentGoods = goods.slice(firstGoodsIndex,lastGoodsIndex)
+    const maxPages = Math.ceil(goods.length/goodsPerPage)
 
+    const nextPage = ()=>setCurrentPage(prev =>{
+        if(prev<maxPages){
+            return prev+1
+        }
+        else{
+            return maxPages
+        }
+    })
+    const prevPage = ()=>setCurrentPage(prev => {
+        if(prev>1){
+            return prev-1
+        }
+        else return 1
+    })
+    const firstPage = ()=>setCurrentPage(1)
+    const lastPage = ()=>setCurrentPage(maxPages)
     const incrementQuantity = (itemId)=>{
         const newOrder = order.map(element=>{
             if(itemId===element.mainId){
@@ -93,7 +117,7 @@ export function Content(){
             {isLoading
             ?<Preloader/>
             :<GoodsList 
-            goods={goods} 
+            goods={currentGoods} 
             addOrder={addOrder}
             />}
             {isHide && <BasketList 
@@ -103,6 +127,13 @@ export function Content(){
             incrementQuantity={incrementQuantity}
             decrementQuantity={decrementQuantity}
             />}
+            {!!goods.length&&
+            <Pagination 
+            maxPages={maxPages}
+            prevPage={prevPage}
+            nextPage={nextPage}
+            firstPage={firstPage}
+            lastPage={lastPage}/>}
         </main>
     )
 }
